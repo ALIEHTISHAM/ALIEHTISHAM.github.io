@@ -388,7 +388,6 @@ footer {
 
     .resume-section {
         padding: 1rem;
-        margin: 0.5rem;
     }
 
     .bio {
@@ -473,5 +472,6 @@ body, p {
         font-size: 0.9rem;
     }
 }
+
 
 
