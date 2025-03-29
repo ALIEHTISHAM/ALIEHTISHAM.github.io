@@ -374,6 +374,25 @@ footer {
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Common list styles */
+.profile-info .tech-list,
+.profile-info,
+.skill-list {
+    list-style-type: disc;
+    padding-left: 24px;
+    margin: 0;
+    text-align: left;
+    width: 100%;
+}
+.name{
+    padding-left: 24px !important;
+}
+
+.left-column h4 {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     .nav-content {
@@ -424,13 +443,16 @@ footer {
 
     .left-column {
         width: 100%;
-        text-align: center;
+        text-align: left;
+        padding: 0;
     }
 
     .profile-info {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
+        width: 100%;
+        padding: 0;
     }
 
     .profile-image-container {
@@ -453,37 +475,57 @@ footer {
         padding: 0 0.5rem;
         width: 100%;
     }
-    /* Resume section specific styles */
-.resume-section {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 2rem;
-}
+    .left-column h4{
+        text-align: left;
+    }
+    .profile-info .tech-list,
+    .profile-info,
+    .skill-list {
+        width: 100%;
+        padding-left: 24px !important;
+        margin: 0 !important;
+        text-align: left !important;
+        list-style-position: outside !important;
+    }
+    .name{
+        padding-left: 24px !important;
+    }
 
-.pdf-container {
-    width: 100%;
-    height: 800px;
-    background-color: #fff;
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-top: 1rem;
-}
+    .tech-learn {
+        padding-left: 24px !important;
+        margin: 0 !important;
+    }
 
-.pdf-container embed {
-    width: 100%;
-    height: 100%;
-}
+    /* Remove any other styles that might interfere */
+    .profile-info .tech-learn {
+        margin-left: 0 !important;
+    }
 
+    .bio {
+        text-align: left;
+        width: 100%;
+        padding: 0;
+    }
     .resume-section {
         padding: 1rem;
     font-size: 1rem;
         text-align: center;
         padding: 0 1rem;
+    }
+
+    /* Remove any conflicting mobile styles */
+    .skill-list {
+        padding-left: 24px !important;
+        margin-left: 0 !important;
+    }
+
+    .profile-info .tech-list,
+    .profile-info .tech-learn,
+    .skill-list {
+        width: 100%;
+        padding-left: 24px;
+        margin: 0;
+        text-align: left;
     }
 } 
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap');
@@ -508,11 +550,6 @@ ce with a tech feel */
 .bio strong {
     color: #0066cc;
     font-weight: 600;
-}
-.skill-list {
-    list-style-type: disc;
-    margin-left: 2rem;
-    text-align: justify;
 }
 
 .education-info {
@@ -553,6 +590,7 @@ ce with a tech feel */
         margin-left: 2rem;
         text-align: left;
     }
+
     
     .education-info .degree {
         font-size: 1rem;
