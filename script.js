@@ -59,21 +59,73 @@ const projectCards =[{
 }]
 
 
-let cardElement='';
+// GitHub username
+const username = 'ALIEHTISHAM'; // Replace with your GitHub username
 
-projectCards.forEach((cardData)=>{
-    cardElement+= `
-                <div class="project-card">
-                    <h3>${cardData.title}</h3>
-                    <p>${cardData.description}</p>
-                    <div class="project-links">
-                        <a href="${cardData.link}" class="project-link">View Project</a>
-                    </div>
-                </div>
-    
-    `
-});
-console.log(cardElement);
+// Function to fetch GitHub repositories
+async function fetchGitHubProjects() {
+    const projectsContainer = document.querySelector('.projects-grid');
+    if (!projectsContainer) return;
 
-document.querySelector('.project-grid').innerHTML=cardElement;
+    // Show loading state
+    projectsContainer.innerHTML = '<div class="loading"><i class="fas fa-spinner fa-spin"></i> Loading projects...</div>';
 
+    try {
+        const response = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&direction=desc`);
+        const repos = await response.json();
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch repositories');
+        }
+
+        // Clear loading state
+        projectsContainer.innerHTML = '';
+
+        // Display repositories
+        repos.forEach(repo => {
+            const card = createProjectCard(repo);
+            projectsContainer.appendChild(card);
+        });
+    } catch (error) {
+        projectsContainer.innerHTML = `
+            <div class="error-message">
+                <i class="fas fa-exclamation-circle"></i>
+                Failed to load projects. Please try again later.
+            </div>
+        `;
+        console.error('Error fetching GitHub projects:', error);
+    }
+}
+
+// Function to create a project card
+function createProjectCard(repo) {
+    const card = document.createElement('div');
+    card.className = 'project-card';
+
+    const technologies = repo.language ? `Technologies: ${repo.language}` : 'No technologies specified';
+
+    card.innerHTML = `
+        <h3>${repo.name}</h3>
+        <p class="project-description">${repo.description || 'No description available'}</p>
+        <p class="project-tech">${technologies}</p>
+        <div class="project-stats">
+            <span><i class="far fa-star"></i> ${repo.stargazers_count}</span>
+            <span><i class="fas fa-code-branch"></i> ${repo.forks_count}</span>
+        </div>
+        <div class="project-links">
+            <a href="${repo.html_url}" target="_blank" class="project-link">
+                <i class="fab fa-github"></i> View Code
+            </a>
+            ${repo.homepage ? `
+                <a href="${repo.homepage}" target="_blank" class="project-link">
+                    <i class="fas fa-external-link-alt"></i> Live Demo
+                </a>
+            ` : ''}
+        </div>
+    `;
+
+    return card;
+}
+
+// Initialize when the DOM is loaded
+document.addEventListener('DOMContentLoaded', fetchGitHubProjects); 
